@@ -2,15 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    renderer: path.resolve(__dirname, '../src/index.tsx')
-  },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/'
   },
   resolve: {
-    extensions: ['.tsx', '.jsx', '.ts', '.js']
+    extensions: ['.tsx', '.jsx', '.ts', '.js', '.json']
   },
   module: {
     rules: [{
@@ -29,6 +27,28 @@ module.exports = {
           extends: path.resolve(__dirname, '../.babelrc')
         }
       }
+    }, {
+      test: /\.s?css$/,
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            sourceMap: false
+          }
+        }, {
+          loader: 'sass-loader',
+          options: {
+            includePaths: ['node_modules'],
+          },
+        }, {
+          loader: 'sass-resources-loader',
+          options: {
+            resources: [
+              path.resolve(__dirname, '../src/styles/settings.scss'),
+            ],
+          },
+        }
+      ]
     }]
   },
   plugins: [
@@ -36,4 +56,4 @@ module.exports = {
       template: path.resolve(__dirname, '../src/index.html')
     })
   ]
-}
+};
