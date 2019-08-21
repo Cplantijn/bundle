@@ -1,0 +1,59 @@
+{
+  "name": "bundle",
+  "version": "1.0.0",
+  "description": "Bundle is an electron based UI to manage npm dependencies",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "npm run clean:dist && webpack --config ./webpack/dev.config.js",
+    "clean:dist": "rimraf ./dist/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cplantijn/bundle.git"
+  },
+  "keywords": [
+    "npm",
+    "packages",
+    "dependency"
+  ],
+  "author": "Christopher Plantijn <cplantijn@accusoft.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cplantijn/bundle/issues"
+  },
+  "homepage": "https://github.com/Cplantijn/bundle#readme",
+  "dependencies": {
+    "electron": "^6.0.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/electron": "^1.6.10",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb-typescript": "^4.0.1",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0",
+    "webpack-merge": "^4.2.1"
+  }
+}
