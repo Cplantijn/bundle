@@ -8,7 +8,7 @@ const baseConfig = require('./base.config');
 module.exports = merge.smartStrategy({
   'module.rules.use': 'prepend'
 })(baseConfig, {
-  target: 'web',
+  target: 'electron-renderer',
   entry: {
     renderer: [
       '@babel/polyfill',
@@ -31,11 +31,12 @@ module.exports = merge.smartStrategy({
     stats: 'errors-only',
     inline: true,
     hot: true,
+    historyApiFallback: true,
     after() {
       /* eslint-disable no-console */
-      console.log(colors.green('\n-----------------------------\n'));
+      console.log(colors.green('\n----------------------------------------------\n'));
       console.log(colors.red.underline('Starting application in DEV mode....'));
-      console.log(colors.green('\n-----------------------------\n'));
+      console.log(colors.green('\n----------------------------------------------\n'));
 
       spawn('npm', ['run', 'start'], {
         shell: true,

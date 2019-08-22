@@ -26,7 +26,10 @@
   },
   "homepage": "https://github.com/Cplantijn/bundle#readme",
   "dependencies": {
+    "@material-ui/core": "^4.3.3",
     "electron": "^6.0.3",
+    "electron-store": "^4.0.0",
+    "idx": "^2.5.6",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-hot-loader": "^4.12.11"
@@ -40,6 +43,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@types/electron": "^1.6.10",
+    "@types/electron-store": "^3.2.0",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",

@@ -1,13 +1,16 @@
 import React from 'react';
 import '../styles/base.scss';
+import StoreProvider from '~components/StoreProvider';
+import ProjectNavigator from '~components/ProjectNavigator';
 
 export default class App extends React.PureComponent {
   render() {
     return (
-      <React.Fragment>
-        <h1>Starting Point</h1>
-        <h2>Electron, Webpack, Typescript, Live reload</h2>
-      </React.Fragment>
+      <StoreProvider>
+        <div className="app-container">
+          <ProjectNavigator />
+        </div>
+      </StoreProvider>
     );
   }
 }

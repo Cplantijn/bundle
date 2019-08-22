@@ -4,7 +4,15 @@ const path = require('path');
 let win;
 
 const createWindow = () => {
-  win = new BrowserWindow({ width: 800, height: 600 });
+  win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    titleBarStyle: 'hidden',
+    icon: path.join(__dirname, 'icons/icon_64.png'),
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
 
   if (process.env.NODE_ENV === 'production') {
     win.loadFile(path.resolve(__dirname, './dist/index.html'));

@@ -18,13 +18,16 @@
     "jsx": "react",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "~components/*": [
-        "components/*"
+        "./src/components/*"
       ],
       "~interfaces/*": [
-        "interfaces/*"
+        "./src/interfaces/*"
+      ],
+      "~contexts/*": [
+        "./src/contexts/*"
       ]
     }
   },

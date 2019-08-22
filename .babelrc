@@ -11,10 +11,11 @@
     [
       "module-resolver",
       {
-        "root": "./src",
+        "root": ".",
         "alias": {
-          "~components": "./components",
-          "~interfaces": "./interfaces"
+          "~components": "./src/components",
+          "~interfaces": "./src/interfaces",
+          "~contexts": "./src/contexts"
         }
       }
     ]
