@@ -21,15 +21,15 @@
   "rules": {
     "comma-dangle": "off",
     "func-names": ["error", "never"],
-    "semi": ["warn", "always", { "omitLastInOneLineBlock": true }],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-    "import/no-unresolved": ["error", { "ignore": ["~components", "~interfaces", "~contexts"]}],
+    "import/no-unresolved": ["error", { "ignore": ["~components", "~interfaces", "~contexts", "~helpers"]}],
     "react/destructuring-assignment": 0,
     "react/prop-types": [1, { "ignore": ["children"]}],
     "@typescript-eslint/explicit-member-accessibility": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/interface-name-prefix": [1, "always"],
+    "@typescript-eslint/interface-name-prefix": 0,
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-var-requires": "off"
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/semi": ["warn", "always", { "omitLastInOneLineBlock": true }]
   }
 }

@@ -27,12 +27,19 @@
   "homepage": "https://github.com/Cplantijn/bundle#readme",
   "dependencies": {
     "@material-ui/core": "^4.3.3",
+    "@mdi/js": "^4.1.95",
+    "@mdi/react": "^1.2.1",
+    "color": "^3.1.2",
     "electron": "^6.0.3",
     "electron-store": "^4.0.0",
     "idx": "^2.5.6",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-hot-loader": "^4.12.11"
+    "react-hot-loader": "^4.12.11",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "shortid": "^2.2.14",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -46,6 +53,9 @@
     "@types/electron-store": "^3.2.0",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/react-router": "^5.0.3",
+    "@types/react-router-dom": "^4.3.5",
+    "@types/shortid": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^3.2.0",

@@ -1,0 +1,14 @@
+.dependency-list-container {
+  height: 100%;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid black;
+}
+
+.dependency-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}

@@ -1,38 +1,41 @@
 import React from 'react';
-import util from 'util';
-import path from 'path';
-import fs from 'fs';
+import shortId from 'shortid';
 import idx from 'idx';
+import Icon from '@mdi/react';
+import { mdiPlus } from '@mdi/js';
 import Tooltip from '@material-ui/core/Tooltip';
 import { remote } from 'electron';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+
+import getPackageFile from '~helpers/getPackageFile';
 import WithStore from '~components/WithStore';
+import ProjectTile from '~components/ProjectTile';
 import IStoreContextProps from '~interfaces/StoreContext';
 
 import './ProjectNavigator.scss';
 
-class ProjectNavigator extends React.PureComponent<IStoreContextProps> {
+type IProjectNavigatorProps = IStoreContextProps & RouteComponentProps;
+
+class ProjectNavigator extends React.Component<IProjectNavigatorProps> {
   browseForProject = async () => {
     const dialogResult = await remote.dialog.showOpenDialog({
       properties: ['openDirectory', 'multiSelections']
     });
 
-    const promiseReadFile = util.promisify(fs.readFile);
-
     try {
       const candidateProjectPath = idx(dialogResult, _ => _.filePaths[0]);
       if (!candidateProjectPath) throw new Error('Could not process project path');
-
-      const packageFile = JSON.parse(await promiseReadFile(path.resolve(candidateProjectPath, 'package.json'), 'utf-8'));
+      const packageFile = await getPackageFile(candidateProjectPath);
       const projectName = packageFile.name || candidateProjectPath.split('/')[candidateProjectPath.split('/').length - 1];
 
-      // const existingProjects = this.props.getStore('projects') || [];
-      const newProjectEntry = [{
+      const newProjectEntry = {
+        id: shortId.generate(),
         path: candidateProjectPath,
         name: projectName,
         icon: ''
-      }];
+      };
 
-      // this.props.setStore('projects', existingProjects.concat(newProjectEntry));
+      this.props.addProject(newProjectEntry);
     } catch (e) {
       if (e.message.includes('ENOENT')) {
         /* eslint-disable no-alert */
@@ -41,13 +44,52 @@ class ProjectNavigator extends React.PureComponent<IStoreContextProps> {
     }
   };
 
+  selectProject = (pId: string) => {
+    this.props.history.push(`/project/${pId}`);
+  };
+
   drawProjectIcons = () => {
-    return <p>Meow</p>;
+    if (!this.props.store.projects) return null;
+    const { pathname } = this.props.location;
+
+    return this.props.store.projects.map(project => {
+      let containerCls = 'project-tile-container';
+      const projectMatched = pathname.includes(`/project/${project.id}`);
+
+      if (projectMatched) {
+        containerCls += ' selected';
+      }
+
+      return (
+        <Tooltip
+          key={project.id}
+          title={project.name}
+          aria-label="select"
+          placement="right"
+        >
+          <div
+            className={containerCls}
+            onClick={() => this.selectProject(project.id)}
+            role="button"
+            tabIndex={-1}
+            onKeyDown={e => {
+              if (e.keyCode === 13) {
+                this.selectProject(project.id);
+              }
+            }}
+          >
+            <div className="project-tile">
+              <div className="project-tile-contents">
+                <ProjectTile name={project.name} icon={project.icon} />
+              </div>
+            </div>
+          </div>
+        </Tooltip>
+      );
+    });
   };
 
   render() {
-    console.log('PROPS', this.props);
-
     return (
       <div className="project-navigator">
         {this.drawProjectIcons()}
@@ -56,19 +98,27 @@ class ProjectNavigator extends React.PureComponent<IStoreContextProps> {
           aria-label="add"
           placement="right"
         >
-          <button
-            type="button"
+          <div
+            className="project-tile-container"
+            role="button"
             onClick={this.browseForProject}
-            className="project-tile add-project-tile"
+            onKeyDown={e => {
+              if (e.keyCode === 13) {
+                this.browseForProject();
+              }
+            }}
+            tabIndex={-1}
           >
-            <div className="project-tile-contents">
-              +
+            <div className="project-tile add-project-tile">
+              <div className="project-tile-contents">
+                <Icon path={mdiPlus} color="white" size={1} />
+              </div>
             </div>
-          </button>
+          </div>
         </Tooltip>
       </div>
     );
   }
 }
 
-export default WithStore(ProjectNavigator);
+export default WithStore(withRouter(ProjectNavigator));

@@ -26,6 +26,9 @@
       "~interfaces/*": [
         "./src/interfaces/*"
       ],
+      "~helpers/*": [
+        "./src/helpers/*"
+      ],
       "~contexts/*": [
         "./src/contexts/*"
       ]

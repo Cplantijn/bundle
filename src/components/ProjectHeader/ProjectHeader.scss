@@ -1,0 +1,16 @@
+.project-header {
+  color: $snow;
+  background-color: $charcoal;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+.header-path {
+  display: flex;
+  align-items: center;
+  margin-top: .5rem;
+  svg {
+    fill: $snow;
+    margin-right: .5rem;
+  }
+}

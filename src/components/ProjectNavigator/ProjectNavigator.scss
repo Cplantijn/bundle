@@ -1,16 +1,26 @@
+@mixin tile($color) {
+  .project-tile-badge {
+    background-color: $color;
+    border: 2px solid darken($color, 20%);
+  }
+}
+
 .project-navigator {
   background-color: $sky;
-  height: 100%;
+  height: calc(100% - 2rem);
   width: 64px;
-  padding-top: 1rem;
+  padding-top: 2rem;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 }
 
 .project-tile {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  max-width: 42px;
+  height: 42px;
+  max-height: 42px;
   border-radius: 8px;
   outline: none;
   background-color: transparent;
@@ -20,6 +30,7 @@
   align-items: center;
   padding: 0;
   transition: border-color .2s;
+
   &.add-project-tile {
     .project-tile-contents {
       border: 1px solid lighten($sky, 20%);
@@ -39,6 +50,54 @@
       .project-tile-contents {
         background-color: darken($snow, 10%);
       }
+    }
+  }
+}
+
+.project-tile-container {
+  margin-bottom: .5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  &:focus {
+    outline: none;
+  }
+
+  &.selected {
+    position: relative;
+    background-color: rgba($snow, .3);
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      bottom: 2px;
+      left: 0;
+      width: 4px;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      background-color: $snow;
+    }
+  }
+
+  &:not(.add-project-tile) {
+    @include tile($charcoal);
+
+    &:nth-child(1) {
+      .project-tile {
+        @include tile(#DB3A34);
+      }
+    }
+    &:nth-child(2) {
+      @include tile(#FF8747);
+    }
+    &:nth-child(3) {
+      @include tile(#7948CE);
+    }
+    &:nth-child(4) {
+      @include tile(#F25F5C);
+    }
+    &:nth-child(5) {
+      @include tile(#4D61D1);
     }
   }
 }
