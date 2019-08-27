@@ -24,3 +24,18 @@ html, body, #root {
   display: flex;
   flex: 1;
 }
+
+::-webkit-scrollbar-track {
+  border: 1px solid darken($charcoal, 10%);
+	background-color: darken($charcoal, 5%);
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+	background-color: $charcoal;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $snow;	
+  border-radius: 8px;
+}

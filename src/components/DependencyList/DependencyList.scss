@@ -1,5 +1,4 @@
 .dependency-list-container {
-  height: 100%;
   width: 280px;
   display: flex;
   flex-direction: column;
@@ -7,8 +6,100 @@
 }
 
 .dependency-list {
-  display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
+  overflow: auto;
+  margin-left: 0;
+  &>[class^="MuiList"] {
+    width: 100%;
+    padding-top: 0;
+    .MuiListItem-root {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border-bottom: 1px solid darken($charcoal, 8%);
+      position: relative;
+      overflow: hidden;
+      padding-left: 1.5rem;
+      &[data-selected="true"] {
+        background-color: $sunset;
+        color: $charcoal;
+        .dependency-header {
+          span {
+            color: lighten($clay, 30%);
+          }
+        }
+
+        .dependency-badge {
+          color: $snow;
+          background-color: $charcoal;
+          &.upgrade {
+            color: $sunset;
+            background-color: $snow;
+          }
+        }
+
+        svg {
+          fill: $charcoal;
+        }
+      }
+    }
+  }
+  .MuiListItemText-secondary {
+    color: $clay;
+  }
+}
+
+.dependency-header {
+  display: flex;
+  align-items: center;
+  h6 {
+    font-size: 1.1rem;
+    span {
+      margin-left: .5rem;
+      font-size: .8rem;
+      color: $clay;
+    }
+  }
+  padding-bottom: .125rem;
+}
+
+.dependency-body {
+  display: flex;
+  align-items: center;
+  svg {
+    fill: $snow;
+    margin-right: .25rem;
+  }
+}
+
+.dependency-badge {
+  background-color: $snow;
+  color: $charcoal;
+  padding: .125rem .5rem;
+  border-radius: 4px;
+  margin-right: .25rem;
+  &.upgrade {
+    background-color: $sunset;
+    color: white;
+  }
+}
+
+.dependency-dev-badge {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  height: 100%;
+  width: 1rem;
+  display: flex;
+  align-items: center;
+  background-color: #8EB1C7;
+  span {
+    font-size: .9rem;
+    color: $snow;
+    display: block;
+    transform: rotate(-90deg) translate(0, -20%);
+  }
 }

@@ -1,5 +1,8 @@
 export default interface Dependency {
-  installedVersion: string;
+  semVer: string;
   name: string;
   isDevDependency: boolean;
+  version: string;
+  canUpgrade: boolean;
+  latestAvailableVersion: string;
 }
