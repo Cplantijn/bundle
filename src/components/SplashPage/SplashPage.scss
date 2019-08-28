@@ -1,0 +1,13 @@
+.splash-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $snow;
+  flex-direction: column;
+  svg {
+    height: 200px;
+    margin-bottom: 1rem;
+  }
+}

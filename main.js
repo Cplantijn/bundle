@@ -8,8 +8,6 @@ const sanitizeHtml = require('sanitize-html');
 
 let win;
 
-const execPromise = util.promisify(exec);
-
 const createWindow = () => {
   win = new BrowserWindow({
     width: 800,
@@ -33,7 +31,7 @@ const createWindow = () => {
   });
 
   win.webContents.once('dom-ready', () => {
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
   });
 };
 
@@ -80,4 +78,15 @@ ipcMain.on('GET_DEPENDENCY_README', async (event, arg) => {
   const htmlResponse = await rp.get(arg.dependencyPath);
   const $ = cheerio.load(htmlResponse);
   event.reply('RETURN_DEPENDENCY_README', { html: $('#readme').html() });
+});
+
+ipcMain.on('UPGRADE_DEPENDENCY', async (event, arg) => {
+  await exec(`cd ${arg.projectPath}`);
+
+  try {
+    const result = await exec(`yarn upgrade ${arg.dependencyName}@${arg.versionToUpgrade}`);
+    event.reply('DEPENDENCY_UPGRADED', { stdout: result.stdout, dependencyName: arg.dependencyName, versionUpgraded: arg.versionToUpgrade });
+  } catch (e) {
+    console.log({ e });
+  }
 });

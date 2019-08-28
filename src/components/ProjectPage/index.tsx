@@ -17,6 +17,8 @@ interface IProjectState {
 }
 
 class ProjectPage extends React.PureComponent<IProjectProps, IProjectState> {
+  dependencyListRef = React.createRef<DependencyList>();
+
   state = { activeDependency: null };
 
   getProject = () => {
@@ -25,6 +27,14 @@ class ProjectPage extends React.PureComponent<IProjectProps, IProjectState> {
   };
 
   onDependencyChosen = (dep: IDependency | null) => this.setState({ activeDependency: dep });
+
+  reloadAll = () => {
+    if (!this.dependencyListRef.current) return;
+
+    this.dependencyListRef.current.getProjectDependencies();
+    this.dependencyListRef.current.getOutdatedDependencies();
+    this.setState({ activeDependency: null });
+  };
 
   render() {
     const project = this.getProject();
@@ -38,11 +48,16 @@ class ProjectPage extends React.PureComponent<IProjectProps, IProjectState> {
         <ProjectHeader project={project} />
         <div className="project-page-main">
           <DependencyList
+            ref={this.dependencyListRef}
             project={project}
             onDependencyChosen={this.onDependencyChosen}
             activeDependencyName={activeDepName}
           />
-          <DependencyPage dependency={this.state.activeDependency} />
+          <DependencyPage
+            project={project}
+            dependency={this.state.activeDependency}
+            onRequestReloadAll={this.reloadAll}
+          />
         </div>
       </div>
     );
