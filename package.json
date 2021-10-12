@@ -33,7 +33,7 @@
     "cheerio": "^1.0.0-rc.3",
     "classnames": "^2.2.6",
     "color": "^3.1.2",
-    "electron": "^6.0.3",
+    "electron": "^11.5.0",
     "electron-store": "^4.0.0",
     "idx": "^2.5.6",
     "react": "^16.9.0",
